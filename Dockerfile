@@ -1,8 +1,8 @@
-FROM node:current-buster as build
+FROM quay.io/bitnami/node:latest as build
 COPY . /wstunnel
 RUN cd /wstunnel && npm install --production
 
-FROM node:current-alpine
+FROM quay.io/jitesoft/alpine:latest
 COPY --from=build /wstunnel /wstunnel
 WORKDIR /wstunnel
 ENTRYPOINT ["node", "/wstunnel/bin/wstt.js"]
